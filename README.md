@@ -42,7 +42,7 @@ PEXELS_API_KEY=填入你自己的金鑰
 
 若日後建立了真正的 Azure Speech 資源並希望加旁白，可在 `.env` 補上 `AZURE_SPEECH_KEY` 及區域代碼 `AZURE_SPEECH_REGION`，並在主指令後加 `--azure-tts`。Knowlez 等第三方 TTS 金鑰不能用在這兩個變數。
 
-輸出在 `data/auto-shorts/KjAI9r8tnOs/`，檔名以 `_preview.mp4` 結尾；來源音訊、逐字稿、候選規劃及改寫腳本在 `data/KjAI9r8tnOs/`；各短片的素材來源、分鏡與語音快取在 `data/auto-live/KjAI9r8tnOs/<候選ID>/`。素材來源記錄為 `footage_sources.json`，包含 Pexels 頁面與作者。程式若找不到適合的直式影片會停止並顯示對應的搜尋詞，不會自行用原始新聞畫面充數。
+輸出在 `data/auto-shorts/KjAI9r8tnOs/`，檔名以 `_preview.mp4` 結尾；來源音訊、逐字稿、候選規劃及改寫腳本在 `data/KjAI9r8tnOs/`；各短片的素材來源、分鏡（選用旁白時還有語音快取）在 `data/auto-live/KjAI9r8tnOs/<候選ID>/`。素材來源記錄為 `footage_sources.json`，包含 Pexels 頁面與作者。程式若找不到適合的直式影片會停止並顯示對應的搜尋詞，不會自行用原始新聞畫面充數。
 
 完成後逐支觀看，核對原來源與數字、字幕閱讀時間，以及素材畫面與授權。`review_status: needs_human_review` 表示只能用來審稿。需要檢查程式時執行 `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`；測試使用模擬 API 回應，不會向雲端發出付費請求。
 
@@ -55,6 +55,6 @@ PEXELS_API_KEY=填入你自己的金鑰
 | 實拍素材 | 對每支腳本產生 2–3 個場景搜尋詞；每個場景至多做 2 次 Pexels 搜尋、最多下載 1 段影片。預設 2 支影片，整輪最多約 12 次搜尋及 6 段影片下載；搜尋回應快取 24 小時，影片重用。Pexels 有使用與 API 條款，審稿時須檢查。 |
 | 字幕與影片 | 依字幕字數估計閱讀時間；FFmpeg 在本機剪輯、編碼，不呼叫語音 API，也不使用雲端影片生成。可選的 Azure 旁白只有加 `--azure-tts` 時才使用。 |
 
-原報導只用於取材和核對；模型需改寫句構及敘事，影片開頭旁白與畫面會標出原來源。程式會提示人工檢查連續相同文字和數字；如果需要數據圖表，應用已查證數據以程式重繪，不能使用新聞原片的圖表截圖。模型產生的搜尋詞和自動選到的影片也可能不貼題，公開前必須審查。
+原報導只用於取材和核對；模型需改寫句構及敘事，影片字幕與畫面會標出原來源。程式會提示人工檢查連續相同文字和數字；如果需要數據圖表，應用已查證數據以程式重繪，不能使用新聞原片的圖表截圖。模型產生的搜尋詞和自動選到的影片也可能不貼題，公開前必須審查。
 
 官方文件：[Pexels API](https://www.pexels.com/api/documentation/)、[Pexels 授權](https://www.pexels.com/license/)、[Gemini 定價](https://ai.google.dev/gemini-api/docs/pricing)、[Azure Speech 定價](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/)。
